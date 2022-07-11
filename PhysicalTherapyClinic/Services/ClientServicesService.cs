@@ -19,7 +19,7 @@ namespace PhysicalTherapyClinic.Services
         {
             try
             {
-                CompanyService companyService = await _dbContext.CompanyServices.FirstOrDefaultAsync(q => q.Id == clinetServiceViewModel.CompanyService_Id && !q.Is_Deleted);
+                CompanyService companyService = await _dbContext.CompanyServices.FirstOrDefaultAsync(q => q.Id == clinetServiceViewModel.CompanyServiceId && !q.Is_Deleted);
 
                 Client client = new Client()
                 {
@@ -35,7 +35,8 @@ namespace PhysicalTherapyClinic.Services
                 ClientService clientService = new ClientService()
                 {
                     Id = Guid.NewGuid(),
-                    Company_Service_Id = clinetServiceViewModel.CompanyService_Id,
+                    Client_Id = client.Id,
+                    Company_Service_Id = clinetServiceViewModel.CompanyServiceId,
                     Service_Price = companyService.Price,
                     Payment_Method = clinetServiceViewModel.PaymentMethodType,
                     Endurance_Ratio = clinetServiceViewModel.EnduranceRatio,

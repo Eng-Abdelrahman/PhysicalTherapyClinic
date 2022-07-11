@@ -6,7 +6,7 @@
         public string Phone { get; set; }
         public string Address { get; set; }
         public string PaymentMethodType { get; set; }
-        public Guid CompanyService_Id { get; set; }
+        public Guid CompanyServiceId { get; set; }
         public double EnduranceRatio { get; set; }
     }
 }

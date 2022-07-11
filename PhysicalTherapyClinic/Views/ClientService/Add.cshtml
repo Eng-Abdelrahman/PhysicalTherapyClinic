@@ -1,0 +1,119 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model AddClinetServiceViewModel
+
+}
+<div class="row">
+    @using (Html.BeginForm("Add", "ClientService", FormMethod.Post))
+    {
+        @Html.HiddenFor(a=>a.CompanyServiceId);
+        @Html.HiddenFor(a=>a.PaymentMethodType);
+        <div class="card">
+            <div class="card-header main-header">
+                <h5 class="mb-0">Add Clint servic</h5>
+            </div>
+            <div class="card-body pt-0 p-3 row">
+                <div class="col-md-4">
+                    <label asp-for="ClientName" class="k-label k-input-label">إسم العميل <span class='text-danger ml-1'>*</span> </label>
+                    @Html.TextBoxFor(m=>m.ClientName, new {@id="txtClientName",@name="ClientName" })
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Phone" class="k-label k-input-label">الهاتف <span class='text-danger ml-1'>*</span> </label>
+                    @Html.TextBoxFor(m=>m.Phone, new {@id="txtPhone",@name="Phone" })
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Address" class="k-label k-input-label">المنطقة السكنية <span class='text-danger ml-1'>*</span> </label>
+                    @Html.TextBoxFor(m=>m.Address, new {@id="txtAddress",@name="Address" })
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="PaymentMethodType" class="k-label k-input-label">طريقة المحاسبة <span class='text-danger ml-1'>*</span> </label>
+                    <select id="SubjectList" name="SubjectList">
+                        <option value="Cash">نقدي</option>
+                        <option value="Credit">آجل</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="k-label k-input-label">الشركه  <span class='text-danger ml-1'>*</span> </label>
+                    <select id="companyDDL" name="companyList">
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="CompanyServiceId" class="k-label k-input-label">الخدمة <span class='text-danger ml-1'>*</span> </label>
+                    <select id="CompanyServiceDDL" name="CompanyServiceList">
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="k-label k-input-label">سعر الخدمة </label>
+                    <label id="price"></label>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="EnduranceRatio" class="k-label k-input-label">نسبة التحمل <span class='text-danger ml-1'>*</span> </label>
+                    @Html.TextBoxFor(m=>m.EnduranceRatio, new {@id="txtEnduranceRatio",@name="EnduranceRatio" })
+                </div>
+            </div>
+            <div class="card-footer mx-4 p-3 text-center">
+
+                <button type="submit" class="btn btn-primary">Save</button>
+
+            </div>
+        </div>
+    }
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+         $("#SubjectList").change(function () {
+             
+             $("#PaymentMethodType").val(this.value);
+        });
+         $("#companyDDL").change(function () {
+            var valCompany = this.value;
+            GetCompanyServiceDDL(valCompany);
+        });
+             $("#CompanyServiceDDL").change(function () {
+            var valPrice = $(this).find(':selected').data('price');
+            $("#CompanyServiceId").val(this.value);
+             $('#price').text(valPrice);
+        });
+    $( document ).ready(function() {
+         GetCompanyDDL();
+    });
+          function GetCompanyDDL() {
+            let host = window.location.origin;
+            $.ajax({
+              type: "GET",
+              url: host + '/ClientService/GetCompanies',
+              dataType: "json",
+              success: function (data) {
+                if (data !== null || data !== undefined) {
+                  console.log(data)
+                  data.forEach(Company => {
+                    var company = $(`<option value="${Company.companyId}">${Company.companyName}</option> `)
+                    company.appendTo('#companyDDL');
+                  })
+                }
+              }
+            });
+          }
+
+               function GetCompanyServiceDDL(companyId) {
+            let host = window.location.origin;
+            $.ajax({
+              type: "GET",
+              url: host + '/ClientService/GetCompanyServices?companyId='+companyId,
+              dataType: "json",
+              success: function (data) {
+                if (data !== null || data !== undefined) {
+                  console.log(data)
+                   $('#CompanyServiceDDL').empty();
+                   $('#price').text("");
+                  data.forEach(service => {
+                    var companyService = $(`<option value="${service.companyServiceId}" data-price=${service.servicePrice}>${service.serviceName}</option> `)
+                    companyService.appendTo('#CompanyServiceDDL');
+                  })
+                }
+              }
+            });
+          }
+</script>
