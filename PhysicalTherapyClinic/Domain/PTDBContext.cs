@@ -4,9 +4,9 @@ using PhysicalTherapyClinic.Domain.Entities;
 
 namespace PhysicalTherapyClinic.Domain
 {
-    public class PTCContext : IdentityDbContext
+    public class PTDBContext : IdentityDbContext
     {
-        public PTCContext(DbContextOptions<PTCContext> options) : base(options)
+        public PTDBContext(DbContextOptions<PTDBContext> options) : base(options)
         {
 
         }

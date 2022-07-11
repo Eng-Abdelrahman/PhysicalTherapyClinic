@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhysicalTherapyClinic.Domain;
 
@@ -11,9 +12,10 @@ using PhysicalTherapyClinic.Domain;
 namespace PhysicalTherapyClinic.Migrations
 {
     [DbContext(typeof(PTDBContext))]
-    partial class PTCContextModelSnapshot : ModelSnapshot
+    [Migration("20220711120834_EditColumnsName")]
+    partial class EditColumnsName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,8 +239,17 @@ namespace PhysicalTherapyClinic.Migrations
                     b.Property<DateTime>("Create_Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("Created_By")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Is_Active")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("Is_Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("Last_Modified_By")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Last_Modify_Date")
                         .HasColumnType("datetime2");
@@ -267,11 +278,21 @@ namespace PhysicalTherapyClinic.Migrations
                     b.Property<DateTime>("Create_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Endurance_Ratio")
-                        .HasColumnType("float");
+                    b.Property<Guid>("Created_By")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Endurance_Ratio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Is_Active")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("Is_Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("Last_Modified_By")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Last_Modify_Date")
                         .HasColumnType("datetime2");
@@ -305,8 +326,17 @@ namespace PhysicalTherapyClinic.Migrations
                     b.Property<DateTime>("Create_Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("Created_By")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Is_Active")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("Is_Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("Last_Modified_By")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Last_Modify_Date")
                         .HasColumnType("datetime2");
@@ -328,8 +358,17 @@ namespace PhysicalTherapyClinic.Migrations
                     b.Property<DateTime>("Create_Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("Created_By")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Is_Active")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("Is_Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("Last_Modified_By")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Last_Modify_Date")
                         .HasColumnType("datetime2");
@@ -358,8 +397,17 @@ namespace PhysicalTherapyClinic.Migrations
                     b.Property<DateTime>("Create_Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("Created_By")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Is_Active")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("Is_Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("Last_Modified_By")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Last_Modify_Date")
                         .HasColumnType("datetime2");

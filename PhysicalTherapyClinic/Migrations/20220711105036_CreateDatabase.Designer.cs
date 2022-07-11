@@ -11,7 +11,7 @@ using PhysicalTherapyClinic.Domain;
 
 namespace PhysicalTherapyClinic.Migrations
 {
-    [DbContext(typeof(PTCContext))]
+    [DbContext(typeof(PTDBContext))]
     [Migration("20220711105036_CreateDatabase")]
     partial class CreateDatabase
     {
