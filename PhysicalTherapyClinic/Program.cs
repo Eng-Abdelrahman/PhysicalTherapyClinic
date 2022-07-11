@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PhysicalTherapyClinic;
+using PhysicalTherapyClinic.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-builder.Services.AddDbContextPool<PTContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PTConnection")));
+builder.Services.AddDbContextPool<PTCContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PTCConnStr")));
 
 var app = builder.Build();
 
