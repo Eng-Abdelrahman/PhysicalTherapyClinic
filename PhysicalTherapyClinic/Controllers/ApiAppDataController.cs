@@ -35,5 +35,13 @@ namespace PhysicalTherapyClinic.Controllers
             return Ok(await _dropDownListService.AddCompanyService(addCompanyService));
         }
 
+        [Route("api/ApiAppData/Test")]
+        [HttpGet]
+        public async Task<IActionResult> Test(AddCompanyServiceViewModel addCompanyService)
+        {
+            return Ok("Hello From Test :)");
+        }
+
+
     }
 }
