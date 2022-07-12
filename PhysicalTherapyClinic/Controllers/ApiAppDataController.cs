@@ -6,29 +6,29 @@ namespace PhysicalTherapyClinic.Controllers
 {
 
     [ApiController]
-    public class CreateAppDataController : ControllerBase
+    public class ApiAppDataController : ControllerBase
     {
         private readonly IDropDownListService _dropDownListService;
-        public CreateAppDataController(IDropDownListService dropDownListService)
+        public ApiAppDataController(IDropDownListService dropDownListService)
         {
             _dropDownListService = dropDownListService;
         }
 
-        [Route("api/CreateAppData/AddCompany")]
+        [Route("api/ApiAppData/AddCompany")]
         [HttpPost]
         public async Task<IActionResult> AddCompany(AddCompanyViewModel addCompany)
         {            
             return Ok(await _dropDownListService.AddCompany(addCompany));
         }
 
-        [Route("api/CreateAppData/AddService")]
+        [Route("api/ApiAppData/AddService")]
         [HttpPost]
         public async Task<IActionResult> AddService(AddServiceViewModel addService)
         {            
             return Ok(await _dropDownListService.AddService(addService));
         }
 
-        [Route("api/CreateAppData/AddCompanyService")]
+        [Route("api/ApiAppData/AddCompanyService")]
         [HttpPost]
         public async Task<IActionResult> AddCompanyService(AddCompanyServiceViewModel addCompanyService)
         {            

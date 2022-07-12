@@ -6,223 +6,6 @@
     @model List<ClientServiceViewModel>
 
 }
-<style>
-    body {
-        font-family: "Helvetica Neue", Helvetica, Arial;
-        font-size: 14px;
-        line-height: 20px;
-        font-weight: 400;
-        color: #3b3b3b;
-        -webkit-font-smoothing: antialiased;
-        font-smoothing: antialiased;
-        background: #2b2b2b;
-    }
-
-    @@media screen and (max-width: 580px) {
-        body {
-            font-size: 16px;
-            line-height: 22px;
-        }
-    }
-
-    .wrapper {
-        margin: 0 auto;
-        padding: 40px;
-        max-width: 800px;
-    }
-
-    .table {
-        margin: 0 0 40px 0;
-        width: 100%;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        display: table;
-    }
-
-    @@media screen and (max-width: 580px) {
-        .table {
-            display: block;
-        }
-    }
-
-    .row {
-        display: table-row;
-        background: #f6f6f6;
-    }
-
-        .row:nth-of-type(odd) {
-            background: #e9e9e9;
-        }
-
-        .row.header {
-            font-weight: 900;
-            color: #ffffff;
-            background: #ea6153;
-        }
-
-        .row.green {
-            background: #27ae60;
-        }
-
-        .row.blue {
-            background: #2980b9;
-        }
-
-    @@media screen and (max-width: 580px) {
-        .row {
-            padding: 14px 0 7px;
-            display: block;
-        }
-
-            .row.header {
-                padding: 0;
-                height: 6px;
-            }
-
-                .row.header .cell {
-                    display: none;
-                }
-
-            .row .cell {
-                margin-bottom: 10px;
-            }
-
-                .row .cell:before {
-                    margin-bottom: 3px;
-                    content: attr(data-title);
-                    min-width: 98px;
-                    font-size: 10px;
-                    line-height: 10px;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    color: #969696;
-                    display: block;
-                }
-    }
-
-    .cell {
-        padding: 6px 12px;
-        display: table-cell;
-    }
-
-    @@media screen and (max-width: 580px) {
-        .cell {
-            padding: 2px 16px;
-            display: block;
-        }
-    }
-</style>
-
-<a class="btn btn-primary" href="@Url.Action("Add", "ClientService")">  إضافة خدمه لعميل</a>
-
-<div class="wrapper">
-
-    <div class="table">
-
-        <div class="row header">
-
-            <div class="cell">
-                نسبة التحمل
-            </div>
-
-            <div class="cell">
-                سعر الخدمة
-            </div>
-
-            <div class="cell">
-                الخدمة
-            </div>
-
-            <div class="cell">
-                الشركه
-            </div>
-
-            <div class="cell">
-                طريقة المحاسبه
-            </div>
-
-            <div class="cell">
-                المنطقة السكنيه
-            </div>
-
-            <div class="cell">
-                الهاتف
-            </div>
-
-            <div class="cell">
-                أسم العميل
-            </div>
-
-        </div>
-
-        @foreach (ClientServiceViewModel clientService in Model)
-        {
-            <div class="row">
-                <div class="cell">
-                    @clientService.EnduranceRatio
-                </div>
-                <div class="cell">
-                    @clientService.ServicePrice
-                </div>
-                <div class="cell">
-                    @clientService.ServiceName
-                </div>
-                <div class="cell">
-                    @clientService.ClientName
-                </div>
-                <div class="cell">
-                    @clientService.PaymentMethod
-                </div>
-                <div class="cell">
-                    @clientService.Address
-                </div>
-                <div class="cell">
-                    @clientService.Phone
-                </div>
-                <div class="cell">
-                    @clientService.ClientName
-                </div>
-            </div>
-        }
-
-    </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*
 
 <style>
     h1 {
@@ -252,29 +35,32 @@
 
     th {
         padding: 20px 15px;
-        text-align: left;
-        font-weight: 500;
-        font-size: 12px;
+        text-align: right;
+        font-weight: 600;
+        font-size: 20px;
         color: #fff;
         text-transform: uppercase;
     }
 
     td {
         padding: 15px;
-        text-align: left;
+        text-align: right;
         vertical-align: middle;
         font-weight: 300;
-        font-size: 12px;
+        font-size: 1rem;
         color: #fff;
         border-bottom: solid 1px rgba(255, 255, 255, 0.1);
     }
 
+    .btn-primary {
+    }
     /* demo styles */
 
-    =body {
+    body {
         background: -webkit-linear-gradient(left, #25c481, #25b7c4);
         background: linear-gradient(to right, #25c481, #25b7c4);
         font-family: "Roboto", sans-serif;
+        direction: rtl;
     }
 
     section {
@@ -325,21 +111,23 @@
 
 </style>
 
-<a class="btn btn-primary" href="@Url.Action("Add", "ClientService")">إضافة خدمه لعميل</a>
 
-<section>
+<section style="table table-responsive">
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary mb-3" href="@Url.Action("Add", "ClientService")"> إضافة خدمه لعميل <b>+</b></a>
+    </div>
     <div class="tbl-header">
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
                 <tr>
-                    <th> نسبة التحمل</th>
-                    <th>سعر الخدمة</th>
-                    <th>الخدمة</th>
-                    <th>الشركه</th>
-                    <th>طريقة المحاسبه</th>
-                    <th>المنطقة السكنيه</th>
-                    <th> الهاتف</th>
                     <th>أسم العميل</th>
+                    <th> الهاتف</th>
+                    <th>المنطقة السكنيه</th>
+                    <th>طريقة المحاسبه</th>
+                    <th>الشركه</th>
+                    <th>الخدمة</th>
+                    <th>سعر الخدمة</th>
+                    <th> نسبة التحمل</th>
                 </tr>
             </thead>
         </table>
@@ -350,14 +138,14 @@
                 @foreach (ClientServiceViewModel clientService in Model)
                 {
                     <tr>
-                        <td>@clientService.EnduranceRatio</td>
-                        <td>@clientService.ServicePrice</td>
-                        <td>@clientService.ServiceName</td>
                         <td>@clientService.ClientName</td>
-                        <td>@clientService.PaymentMethod</td>
-                        <td>@clientService.Address</td>
                         <td>@clientService.Phone</td>
-                        <td>@clientService.ClientName</td>
+                        <td>@clientService.Address</td>
+                        <td>@clientService.PaymentMethod</td>
+                        <td>@clientService.CompanyName</td>
+                        <td>@clientService.ServiceName</td>
+                        <td>@clientService.ServicePrice</td>
+                        <td>@clientService.EnduranceRatio</td>
                     </tr>
                 }
 
@@ -365,13 +153,11 @@
         </table>
     </div>
 </section>
-<script>
-    $(window)
-      .on("load resize ", function () {
-        var scrollWidth =
-          $(".tbl-content").width() - $(".tbl-content table").width();
-        $(".tbl-header").css({ "padding-right": scrollWidth });
-      })
-      .resize();
 
-</script>*@
+
+<script>
+    $(window).on("load resize ", function() {
+      var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+      $('.tbl-header').css({'padding-right':scrollWidth});
+    }).resize();
+</script>
