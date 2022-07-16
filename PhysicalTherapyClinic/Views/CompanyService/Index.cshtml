@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<CompanyServiceViewModel>
+
+
+<div class="d-flex justify-content-end">
+    <a class="btn btn-primary mb-3" href="@Url.Action("Add", "Company")"> إضافة خدمة لشركة <b>+</b></a>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col"> إسم الشركه</th>
+            <th scope="col"> إسم الخدمة</th>
+            <th scope="col">  سعر الخدمة</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CompanyServiceViewModel companyService in Model)
+        {
+            <tr class="table-active">
+                <td>@companyService.CompanyName</td>
+                <td>@companyService.ServiceName</td>
+                <td>@companyService.ServicePrice</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

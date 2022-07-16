@@ -7,157 +7,38 @@
 
 }
 
-<style>
-    h1 {
-        font-size: 30px;
-        color: #fff;
-        text-transform: uppercase;
-        font-weight: 300;
-        text-align: center;
-        margin-bottom: 15px;
-    }
+<div class="d-flex justify-content-end">
+    <a class="btn btn-primary mb-3" href="@Url.Action("Add", "ClientService")"> إضافة خدمه لعميل <b>+</b></a>
+</div>
 
-    table {
-        width: 100%;
-        table-layout: fixed;
-    }
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">أسم العميل</th>
+            <th scope="col"> الهاتف</th>
+            <th scope="col">المنطقة السكنيه</th>
+            <th scope="col">طريقة المحاسبه</th>
+            <th scope="col">الشركه</th>
+            <th scope="col">الخدمة</th>
+            <th scope="col">سعر الخدمة</th>
+            <th scope="col"> نسبة التحمل</th>
 
-    .tbl-header {
-        background-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .tbl-content {
-        height: 300px;
-        overflow-x: auto;
-        margin-top: 0px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    th {
-        padding: 20px 15px;
-        text-align: right;
-        font-weight: 600;
-        font-size: 20px;
-        color: #fff;
-        text-transform: uppercase;
-    }
-
-    td {
-        padding: 15px;
-        text-align: right;
-        vertical-align: middle;
-        font-weight: 300;
-        font-size: 1rem;
-        color: #fff;
-        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
-    }
-
-    .btn-primary {
-    }
-    /* demo styles */
-
-    body {
-        background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-        background: linear-gradient(to right, #25c481, #25b7c4);
-        font-family: "Roboto", sans-serif;
-        direction: rtl;
-    }
-
-    section {
-        margin: 50px;
-    }
-
-    /* follow me template */
-    .made-with-love {
-        margin-top: 40px;
-        padding: 10px;
-        clear: left;
-        text-align: center;
-        font-size: 10px;
-        font-family: arial;
-        color: #fff;
-    }
-
-        .made-with-love i {
-            font-style: normal;
-            color: #f50057;
-            font-size: 14px;
-            position: relative;
-            top: 2px;
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ClientServiceViewModel clientService in Model)
+        {
+            <tr class="table-active">
+                <td>@clientService.ClientName</td>
+                <td>@clientService.Phone</td>
+                <td>@clientService.Address</td>
+                <td>@clientService.PaymentMethod</td>
+                <td>@clientService.CompanyName</td>
+                <td>@clientService.ServiceName</td>
+                <td>@clientService.ServicePrice</td>
+                <td>@clientService.EnduranceRatio</td>
+            </tr>
         }
 
-        .made-with-love a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-            .made-with-love a:hover {
-                text-decoration: underline;
-            }
-
-    /* for custom scrollbar for webkit browser*/
-
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
-
-    ::-webkit-scrollbar-thumb {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
-
-</style>
-
-
-<section style="table table-responsive">
-    <div class="d-flex justify-content-end">
-        <a class="btn btn-primary mb-3" href="@Url.Action("Add", "ClientService")"> إضافة خدمه لعميل <b>+</b></a>
-    </div>
-    <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-                <tr>
-                    <th>أسم العميل</th>
-                    <th> الهاتف</th>
-                    <th>المنطقة السكنيه</th>
-                    <th>طريقة المحاسبه</th>
-                    <th>الشركه</th>
-                    <th>الخدمة</th>
-                    <th>سعر الخدمة</th>
-                    <th> نسبة التحمل</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-                @foreach (ClientServiceViewModel clientService in Model)
-                {
-                    <tr>
-                        <td>@clientService.ClientName</td>
-                        <td>@clientService.Phone</td>
-                        <td>@clientService.Address</td>
-                        <td>@clientService.PaymentMethod</td>
-                        <td>@clientService.CompanyName</td>
-                        <td>@clientService.ServiceName</td>
-                        <td>@clientService.ServicePrice</td>
-                        <td>@clientService.EnduranceRatio</td>
-                    </tr>
-                }
-
-            </tbody>
-        </table>
-    </div>
-</section>
-
-
-<script>
-    $(window).on("load resize ", function() {
-      var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-      $('.tbl-header').css({'padding-right':scrollWidth});
-    }).resize();
-</script>
+    </tbody>
+</table>

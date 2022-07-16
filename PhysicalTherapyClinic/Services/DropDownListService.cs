@@ -140,6 +140,52 @@ namespace PhysicalTherapyClinic.Services
             }
         }
 
+        public async Task<List<ServiceViewModel>> GetServices()
+        {
+            try
+            {
+                List<Service> services = await _dbContext.Services.Where(q => !q.Is_Deleted).ToListAsync();
+
+                List<ServiceViewModel> companiesViewModel = services.Select(q => new ServiceViewModel
+                {
+                    ServiceId = q.Id,
+                    ServiceName = q.Service_Name
+                }).ToList();
+
+                return companiesViewModel;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<List<CompanyServiceViewModel>> GetCompanyServices()
+        {
+            try
+            {
+                List<CompanyService> companyServices = await _dbContext.CompanyServices.Include(q => q.Company).Include(q => q.Service).Where(q => !q.Is_Deleted).ToListAsync();
+
+                List<CompanyServiceViewModel> companiesViewModel = companyServices.Select(q => new CompanyServiceViewModel
+                {
+                    CompanyServiceId = q.Id,
+                    ServiceName = q.Service.Service_Name,
+                    ServicePrice = q.Price,
+                    CompanyName = q.Company.Company_Name
+                }).OrderBy(q => q.CompanyName).ThenBy(q => q.ServiceName).ToList();
+
+                return companiesViewModel;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         #endregion
 
 
