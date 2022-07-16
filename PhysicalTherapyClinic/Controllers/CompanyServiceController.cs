@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhysicalTherapyClinic.Models;
 using PhysicalTherapyClinic.Services.Interfaces;
 
 namespace PhysicalTherapyClinic.Controllers
@@ -14,6 +15,20 @@ namespace PhysicalTherapyClinic.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _dropDownListService.GetCompanyServices());
+        }
+
+        public async Task<IActionResult> Create()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(AddCompanyServiceViewModel addCompanyService)
+        {
+            await _dropDownListService.AddCompanyService(addCompanyService);
+            return RedirectToAction("Index");
         }
     }
 }

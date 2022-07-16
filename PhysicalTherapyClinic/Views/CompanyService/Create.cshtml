@@ -1,0 +1,90 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model AddCompanyServiceViewModel
+
+<form method="post">
+    <fieldset>
+        <legend>إضافة خدمة لشركة</legend>
+
+        <div class="form-group">
+             <label class="form-label mt-4">الشركات <span class='text-danger ml-1'>*</span> </label>
+            <select asp-for="CompanyId"  class="form-select" id="companyDDL">
+            </select>
+        </div>
+
+        <div class="form-group">
+             <label class="form-label mt-4">الخدمات <span class='text-danger ml-1'>*</span> </label>
+            <select asp-for="ServiceId" class="form-select" id="serviceDDL">
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label mt-4">سعر الخدمة</label>
+            <input asp-for="Price" type="text" class="form-control" id="servicePrice" placeholder="أدخل سعر الخدمة">
+            @*<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>*@
+        </div>
+        <button type="submit" class="btn btn-primary">إضافة</button>
+        <button asp-controller="CompanyService" asp-action="Index" class="btn btn-primary">رجوع</button>
+    </fieldset>
+</form>
+
+
+
+<script>
+        // $("#companyDDL").change(function () {  
+        //     $("#CompanyId").val(this.value);
+        //});
+        // $("#serviceDDL").change(function () {
+        //    $("#ServiceId").val(this.value);
+        //});
+
+    $( document ).ready(function() {
+         GetCompanyDDL();
+         GetServiceDDL();
+    });
+          function GetCompanyDDL() {
+            let host = window.location.origin;
+            $.ajax({
+              type: "GET",
+              url: host + '/Company/GetCompanies',
+              dataType: "json",
+                headers: {
+                "Accept": "application/json"
+            },
+              success: function (data) {
+                if (data !== null || data !== undefined) {
+                  console.log(data)
+                  data.forEach(company => {
+                    var company = $(`<option value="${company.companyId}">${company.companyName}</option> `)
+                    company.appendTo('#companyDDL');
+                  })
+                }
+              }
+            });
+          }
+
+           function GetServiceDDL() {
+            let host = window.location.origin;
+            $.ajax({
+              type: "GET",
+              url: host + '/Service/GetServices',
+              dataType: "json",
+                headers: {
+                "Accept": "application/json"
+            },
+              success: function (data) {
+                if (data !== null || data !== undefined) {
+                  console.log("ssssssssssssssssssssss===> ",data)
+                  data.forEach(item => {
+                    var service = $(`<option value="${item.serviceId}">${item.serviceName}</option> `)
+                    service.appendTo('#serviceDDL');
+                  })
+                }
+              }
+            });          
+   }
+</script>
